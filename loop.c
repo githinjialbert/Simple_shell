@@ -90,28 +90,26 @@ void find_cmd(info_t *info)
 	}
 	for (i = 0, k = 0; info->arg[i]; i++)
 		if (!is_delim(info->arg[i], " \t\n"))
-		{
 			k++;
-		}
-		if (!k)
-			return;
-		path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
-		if (path)
-		{
-			info->path = path;
+	if (!k)
+		return;
+	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	if (path)
+	{
+		info->path = path;
+		fork_cmd(info);
+	}
+	else
+	{
+		if ((interactive(info) || _getenv(info, "PATH=")
+					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
-		}
-		else
+		else if (*(info->arg) != '\n')
 		{
-			if ((interactive(info) || _getenv(info, "PATH=")
-						|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-			fork_cmd(info);
-			else if (*(info->arg) != '\n')
-			{
-				info->status = 127;
-				print_error(info, "not found\n");
-			}
+			info->status = 127;
+			print_error(info, "not found\n");
 		}
+	}
 }
 
 /**

@@ -19,13 +19,13 @@ int _myenv(info_t *info)
 char *_getenv(info_t *info, const char *name)
 {
 	list_t *node = info->env;
-	char *v;
+	char *p;
 
 	while (node)
 	{
-		v = starts_with(node->str, name);
-		if (v && *v)
-			return (v);
+		p = starts_with(node->str, name);
+		if (p && *p)
+			return (p);
 		node = node->next;
 	}
 	return (NULL);
@@ -55,15 +55,15 @@ int _mysetenv(info_t *info)
 */
 int _myunsetenv(info_t *info)
 {
-	int n;
+	int i;
 
 	if (info->argc == 1)
 	{
 		_eputs("Too few arguments.\n");
 		return (1);
 	}
-	for (n = 1; n <= info->argc; n++)
-		_unsetenv(info, info->argv[n]);
+	for (i = 1; i <= info->argc; i++)
+		_unsetenv(info, info->argv[i]);
 	return (0);
 }
 
@@ -75,10 +75,10 @@ int _myunsetenv(info_t *info)
 int populate_env_list(info_t *info)
 {
 	list_t *node = NULL;
-	size_t v;
+	size_t i;
 
-	for (v = 0; environ[v]; v++)
-		add_node_end(&node, environ[v], 0);
+	for (i = 0; environ[i]; i++)
+		add_node_end(&node, environ[i], 0);
 	info->env = node;
 	return (0);
 }

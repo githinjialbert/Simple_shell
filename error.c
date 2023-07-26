@@ -6,55 +6,55 @@
 */
 void _eputs(char *str)
 {
-	int v = 0;
+	int i = 0;
 
 	if (!str)
 		return;
-	while (str[v] != '\0')
+	while (str[i] != '\0')
 	{
-		_eputchar(str[v]);
-		v++;
+		_eputchar(str[i]);
+		i++;
 	}
 }
 
 /**
 *_eputchar - writes a char to stderr
-*@a: the char to write
+*@c: the char to write
 *Return: 1 if successful and -1 if otherwise
 */
-int _eputchar(char a)
+int _eputchar(char c)
 {
-	static int v;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (a == BUF_FLUSH || v >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(2, buf, v);
-		v = 0;
+		write(2, buf, i);
+		i = 0;
 	}
-	if (a != BUF_FLUSH)
-		buf[v++] = a;
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 
 /**
 *_putfd - writes the char to a given file
-*@a: the char to write
+*@c: the char to write
 *@fd: the file descriptor
 *Return: 1 if successful -1 if otherwise
 */
-int _putfd(char a, int fd)
+int _putfd(char c, int fd)
 {
-	static int v;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (a == BUF_FLUSH || v >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(fd, buf, v);
-		v = 0;
+		write(fd, buf, i);
+		i = 0;
 	}
-	if (a != BUF_FLUSH)
-		buf[v++] = a;
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 
@@ -66,13 +66,13 @@ int _putfd(char a, int fd)
 */
 int _putsfd(char *str, int fd)
 {
-	int v = 0;
+	int i = 0;
 
 	if (!str)
 		return (0);
-	while (str)
+	while (*str)
 	{
-		v += _putfd(*str++, fd);
+		i += _putfd(*str++, fd);
 	}
-	return (v);
+	return (i);
 }

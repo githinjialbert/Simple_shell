@@ -8,25 +8,26 @@
 */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int v, w;
-	char *x = dest;
+	int i, j = 0;
+	char *s = dest;
 
-	while (src[v] != '\0' && v < n - 1)
+	while (src[i] != '\0' && i < n - 1)
 	{
-		dest[v] = src[v];
-		v++;
+		dest[i] = src[i];
+		i++;
 	}
-	if (v < n)
+	if (i < n)
 	{
-		w = v;
-		while (w < n)
+		j = i;
+		while (j < n)
 		{
-			dest[w] = '\0';
-			w++;
+			dest[j] = '\0';
+			j++;
 		}
 	}
-	return (x);
+	return (s);
 }
+
 /**
 **_strncat - adds a string to another one
 *@dest: the destination
@@ -36,20 +37,22 @@ char *_strncpy(char *dest, char *src, int n)
 */
 char *_strncat(char *dest, char *src, int n)
 {
-	int v, w = 0;
-	char *u = dest;
+	int i, j;
+	char *s = dest;
 
-	while (dest[w] != '\0')
-		w++;
-	while (src[v] != '\0' && v < n)
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0' && j < n)
 	{
-		dest[w] = src[v];
-		w++;
-		v++;
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-	if (v < n)
-		dest[w] = '\0';
-	return (u);
+	if (j < n)
+		dest[i] = '\0';
+	return (s);
 }
 /**
 **_strchr - locates a char

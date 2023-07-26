@@ -25,7 +25,7 @@ int is_delim(char c, char *delim)
 
 /**
 *_isalpha - chcks for an alphabet
-*@c: the char to check
+*@v: the char to check
 *Return: 1 if correct 0 if not
 */
 int _isalpha(int v)
@@ -38,8 +38,8 @@ int _isalpha(int v)
 
 /**
 *_atoi - converts a string to an int
-*@s: string to convert
-*Return: 0 if correct 1 if not 
+*@a: string to convert
+*Return: 0 if correct 1 if not
 */
 int _atoi(char *a)
 {

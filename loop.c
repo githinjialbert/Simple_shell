@@ -113,7 +113,7 @@ void find_cmd(info_t *info)
 }
 
 /**
-*forkCmd - forks a thread to run a command
+*fork_cmd - forks a thread to run a command
 *@info: parameter
 *Return: void
 */

@@ -63,7 +63,7 @@ void free_info(info_t *info, int all)
 			free_list(&(info->history));
 		if (info->alias)
 			free_list(&(info->alias));
-		ffree(info->environ)
+		ffree(info->environ);
 			info->environ = NULL;
 		if (info->environ)
 			info->environ = NULL;

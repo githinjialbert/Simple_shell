@@ -1,29 +1,29 @@
 #include "main.h"
 /**
 *_erratoi - converts a string to an int
-*@a: the string to be renewed
+*@s: the string to be renewed
 *Return: 0 if successful -1 if otherwise
 */
-int _erratoi(char *a)
+int _erratoi(char *s)
 {
-	int v = 0;
-	unsigned long int final = 0;
+	int i = 0;
+	unsigned long int result = 0;
 
-	if (*a == '+')
-		a++;
-	for (v = 0; a[v] != '\0'; v++)
+	if (*s == '+')
+		s++;
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (a[v] >= '0' && a[v] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			final *= 10;
-			final += (a[v] - '0');
-			if (final > INT_MAX)
+			result *= 10;
+			result += (s[i] - '0');
+			if (result > INT_MAX)
 				return (-1);
 		}
 		else
 			return (-1);
 	}
-	return (final);
+	return (result);
 }
 
 /**
@@ -52,33 +52,33 @@ void print_error(info_t *info, char *estr)
 int print_d(int input, int fd)
 {
 	int (*_putchar)(char) = _putchar;
-	int v, hesabu = 0;
+	int i, count = 0;
 	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
 		_putchar = _eputchar;
 	if (input < 0)
 	{
-		_abs_ = input;
+		_abs_ = -input;
 		_putchar('-');
-		hesabu++;
+		count++;
 	}
 	else
 		_abs_ = input;
 	current = _abs_;
-	for (v = 1000000000; v > 1; v /= 10)
+	for (i = 1000000000; i > 1; i /= 10)
 	{
-		if (_abs_ / v)
+		if (_abs_ / i)
 		{
-			_putchar('0' + current / v);
-			hesabu++;
+			_putchar('0' + current / i);
+			count++;
 		}
-		current %= v;
+		current %= i;
 	}
 	_putchar('0' + current);
-	hesabu++;
+	count++;
 
-	return (hesabu);
+	return (count);
 }
 
 /**
@@ -121,14 +121,12 @@ char *convert_number(long int num, int base, int flags)
 */
 void remove_comments(char *buf)
 {
-	int v;
+	int i;
 
-	for (v = 0; buf[v] != '\0'; v++)
-	{
-		if (buf[v] == '#' && (!v || buf[v - 1] == ' '))
+	for (i = 0; buf[i] != '\0'; i++)
+		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
 		{
-			buf[v] = '\0';
+			buf[i] = '\0';
 			break;
 		}
-	}
 }

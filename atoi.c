@@ -24,13 +24,13 @@ int is_delim(char c, char *delim)
 }
 
 /**
-*_isalpha - chcks for an alphabet
-*@v: the char to check
+*_isalpha - checks for an alphabet
+*@c: the char to check
 *Return: 1 if correct 0 if not
 */
-int _isalpha(int v)
+int _isalpha(int c)
 {
-	if ((v >= 'a' || v <= 'z') && (v >= 'A' || v <= 'Z'))
+	if ((c >= 'a' || c <= 'z') && (c >= 'A' || c <= 'Z'))
 		return (1);
 	else
 		return (0);
@@ -38,30 +38,30 @@ int _isalpha(int v)
 
 /**
 *_atoi - converts a string to an int
-*@a: string to convert
+*@s: string to convert
 *Return: 0 if correct 1 if not
 */
-int _atoi(char *a)
+int _atoi(char *s)
 {
-	int v, sign = 1, flag = 0, output;
-	unsigned int final = 0;
+	int i, sign = 1, flag = 0, output;
+	unsigned int result = 0;
 
-	for (v = 0; a[v] != '\0' && flag != 2; v++)
+	for (i = 0; s[i] != '\0' && flag != 2; i++)
 	{
-		if (a[v] == '-')
+		if (s[i] == '-')
 			sign *= -1;
-		if (a[v] >= '0' && a[v] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
 			flag = 1;
-			final *= 10;
-			final += (a[v] - '0');
+			result *= 10;
+			result += (s[i] - '0');
 		}
 		else if (flag == 1)
 			flag = 2;
 	}
 	if (sign == -1)
-		output = -final;
+		output = -result;
 	else
-		output = final;
+		output = result;
 	return (output);
 }
